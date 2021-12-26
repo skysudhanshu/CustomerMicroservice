@@ -23,8 +23,8 @@ namespace customer.Services
             try {
                 CustomerCreationStatus Result = CustomerRepo.CreateCustomer(Customer);
                 HttpClient HttpClient = HttpClientFactory.CreateClient();
-                HttpClient.BaseAddress = new Uri("https://localhost:5001/api/customer");//URL-customer microservice request
-                HttpResponseMessage response = await HttpClient.PostAsJsonAsync("https://localhost:6001/api/Accounts/CreateAccountforCustomer?customerId=" + Result.CustomerId, Customer);//URL-account microservice response, to connect with account microservice to create a customer
+                HttpClient.BaseAddress = new Uri("https://rbs-customer-microservices.azurewebsites.net/api/customer");//URL-customer microservice request
+                HttpResponseMessage response = await HttpClient.PostAsJsonAsync("https://rbs-account-microservice.azurewebsites.net/api/Accounts/CreateAccountforCustomer?customerId=" + Result.CustomerId, Customer);//URL-account microservice response, to connect with account microservice to create a customer
                 if (response.IsSuccessStatusCode)
                 {
                     return Result;
